@@ -1,17 +1,14 @@
 package com.msinfo.Entity;
 
-import java.util.HashSet;
-import java.util.Set;
-
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinColumns;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -35,9 +32,14 @@ public class EmployeeAddressBO {
 	@Column(name="PINCODE")
 	private Integer pincode;
 	
-	@ManyToMany(mappedBy = "employerAddress")
-	private Set<EmployeeBO> employee = new HashSet<EmployeeBO>();
-
+	@OneToOne(
+			cascade = CascadeType.ALL, 
+			fetch = FetchType.LAZY,
+			mappedBy="empAddress"
+			)
+	private EmployeeBO employee;
+	
+	
 	public Integer getEmployeeAddressId() {
 		return employeeAddressId;
 	}
@@ -78,11 +80,12 @@ public class EmployeeAddressBO {
 		this.pincode = pincode;
 	}
 
-	public Set<EmployeeBO> getEmployee() {
+	
+	public EmployeeBO getEmployee() {
 		return employee;
 	}
 
-	public void setEmployee(Set<EmployeeBO> employee) {
+	public void setEmployee(EmployeeBO employee) {
 		this.employee = employee;
 	}
 
@@ -93,6 +96,7 @@ public class EmployeeAddressBO {
 	}
 
 	
+
 	
 }
 

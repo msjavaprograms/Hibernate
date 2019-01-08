@@ -22,7 +22,7 @@ public class TestClient {
 			// Create Record using Hibernate - persist method
 			session.beginTransaction();
 			EmployeeBO emp2 = getEmployee2();
-			session.save(emp2);
+			session.persist(emp2);
 			session.getTransaction().commit();
 
 			// Create Record using Hibernate - persist method
